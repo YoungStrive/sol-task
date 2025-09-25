@@ -24,7 +24,6 @@ contract Task1_3{
       for(uint i = 0; i<size;){
             // 获取当前字符的数值
             uint current = romeNumMap[romeBytes[i]];
-            // 检查下一个字符是否存在且构成减法规则
             if (i + 1 < size) {
                 uint next = romeNumMap[romeBytes[i + 1]];
                 if (current < next) {
@@ -34,7 +33,7 @@ contract Task1_3{
                 }
             } 
               
-            // 普通加法规则
+            // 普通加
             sum += current;
             i += 1;
          }
