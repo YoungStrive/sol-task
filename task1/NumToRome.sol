@@ -101,10 +101,21 @@ contract task1_4{
          //大于等于5
          if(num>=5){
              if(num==9){
-                 string memory strFlag = statusFlag.c"9";  
+                 string memory strFlag = strConcat(statusFlag,"9");  
              }
 
          }
+
+    }
+
+
+    function strConcat(string memory a,string memory b) private  pure  returns (string memory){
+        bytes memory ba =  bytes(a);
+
+        bytes memory bb = bytes(b);
+    
+        bytes memory result  =bytes.concat(ba,bb);
+        return string(result);
 
     }
 
