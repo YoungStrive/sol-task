@@ -52,20 +52,30 @@ contract BeggingContract is Ownable{
     }
     
     //获取捐献金额 最多的地址
-    function getTop3Donate() public view  returns (  address[] memory){
-        address [] memory _top3Donate;
+    function getTop3Donate() public   returns (  address[] memory){
 
-        uint addressLen=_donateAddress.length;
-
+        uint addressLen= _donateAddress.length;
+        //冒泡排序获取最多的捐献者的地址
         for(uint256 i = 0; i < addressLen ; i++){
-            if(_donateMap[_donateAddress[i]] > _donateMap[_donateAddress[i+1]]){
-                    _top3Donate.push(_donateAddress[i]);
-            }
-                
 
+            for(uint j = 0;j < addressLen-i-1; j++){
+                if(_donateMap[_donateAddress[j]] < _donateMap[_donateAddress[j+1]]){
+
+                    address temp = _donateAddress[j];
+
+                    _donateAddress[j] = _donateAddress[j+1];
+
+                    _donateAddress[j+1] = temp;
+                }
+            }     
             
         }
 
+        address[] memory _top3Donate = new address[](3);
+        //取前三名
+        for(uint256 i = 0; i < 3; i++){
+            _top3Donate[i] = _donateAddress[i];
+        }
         return _top3Donate;
 
     }
